@@ -1,2 +1,2 @@
-python -m pip install flask
-pip install flask_mysqldb
+flask
+flask_mysqldb

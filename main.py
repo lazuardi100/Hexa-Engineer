@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask
 from flask_mysqldb import MySQL
 
@@ -13,6 +15,18 @@ mysql = MySQL(app)
 @app.route("/")
 def index():
     return "Hello world"
+
+@app.route('/fetch/<value>', methods=['POST'])
+def fetch(value):
+    return value
+
+@app.route('/api/get/user', methods=['GET'])
+def get_user():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM USER')
+    res = cur.fetchall()
+    cur.close()
+    return json.dumps(res)
 
 @app.route("/adduser")
 def adduser():
