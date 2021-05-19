@@ -24,7 +24,7 @@ def fetch(value):
 @app.route('/api/get/user', methods=['GET'])
 def get_user():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM USER')
+    cur.execute('SELECT * FROM User_table')
     res = cur.fetchall()
     cur.close()
     return json.dumps(res)
