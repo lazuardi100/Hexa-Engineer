@@ -6,7 +6,7 @@ import os
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
-model_path = "~/model/EXT_Model_v1"
+model_path = "./EXT_Model_v1"
 ext_model = tf.keras.models.load_model(model_path)
 
 def predict(data):
