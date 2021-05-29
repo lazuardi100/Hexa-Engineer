@@ -76,7 +76,7 @@ def predict_test():
         'instances': input.tolist()
     }
     data = json.dumps(test_data)
-    response_json = prediction(data)
+    response_json = prediction(input.tolist())
 
     return response_json
 

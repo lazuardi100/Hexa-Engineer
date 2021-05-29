@@ -10,10 +10,12 @@ model_path = "./EXT_Model_v1"
 ext_model = tf.keras.models.load_model(model_path)
 
 def predict(data):
-    prediction = ext_model.predict(data.get("instances"))
+    prediction = ext_model.predict(data)
+   # prediction = ext_model.predict(data.get("instances"))
     prediction_string = [str(pred) for pred in prediction]
     response_json = {
-        "data" : data.get("instances"),
+        "data" : data,
+        #"data" : data.get("instances"),
         "prediction": list(prediction_string)
     }
 
