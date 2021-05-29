@@ -1,11 +1,13 @@
 import json
 import os
 
-from flask import Flask,request
+from flask import Flask, request
 from flask_mysqldb import MySQL
+
 
 from utility import to_JSON
 from model import predict as prediction
+import numpy as np
 
 app = Flask(__name__)
 
@@ -14,15 +16,19 @@ app.config['MYSQL_USER'] = 'user'
 app.config['MYSQL_PASSWORD'] = 'Rahasia'
 app.config['MYSQL_DB'] = 'BANGKIT'
 
+
 mysql = MySQL(app)
+
 
 @app.route("/")
 def index():
     return "Hello world"
 
+
 @app.route('/fetch/<value>', methods=['POST'])
 def fetch(value):
     return value
+
 
 @app.route('/api/get/user', methods=['GET'])
 def get_user():
@@ -33,6 +39,7 @@ def get_user():
     cur.close()
     return json.dumps(res)
 
+
 @app.route('/api/get/user/<int:id>', methods=['GET'])
 def get_detail_user(id):
     cur = mysql.connection.cursor()
@@ -42,10 +49,12 @@ def get_detail_user(id):
     cur.close()
     return json.dumps(res)
 
+
 @app.route('/api/predict/<int:id>', methods=['POST'])
 def predict(id):
     words = request.args.get("words")
     return words
+
 
 @app.route('/api/predict/test', methods=['GET'])
 def predict_test():
@@ -61,10 +70,15 @@ def predict_test():
             'bersenangsenang biar pergi jajah dunia india budaya india nilainilai india lawan bersenangsenang maksud ' \
             'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
             'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
+    input = np.array([words])
+    
+    test_data = {
+        'instances': input.tolist()
+    }
+    data = json.dumps(test_data)
+    response_json = prediction(data)
 
-    result = prediction(words)
-
-    return result
+    return response_json
 
 
 if __name__ == '__main__':
