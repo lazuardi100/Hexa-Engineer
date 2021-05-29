@@ -53,7 +53,16 @@ def get_detail_user(id):
 @app.route('/api/predict/<int:id>', methods=['POST'])
 def predict(id):
     words = request.args.get("words")
-    return words
+
+    np_words = np.array([words])
+
+    test_data = {
+        'instances': np_words.tolist()
+    }
+    data = json.dumps(test_data)
+    response_json = prediction(np_words.tolist())
+
+    return response_json
 
 
 @app.route('/api/predict/test', methods=['GET'])
