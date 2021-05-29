@@ -1,11 +1,13 @@
 import json
 import requests
 import tensorflow as tf
+import os
 
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
-ext_model = tf.keras.models.load_model('gs://b21-cap0116/EXT_Model_v1')
+model_path = "~/model/EXT_Model_v1"
+ext_model = tf.keras.models.load_model(model_path)
 
 def predict(data):
     prediction = ext_model.predict(data.get("instances"))
