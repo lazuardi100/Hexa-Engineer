@@ -18,7 +18,6 @@ import com.hexaengineer.cofinder.ui.detail.DetailUserActivity
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -36,11 +35,11 @@ class HomeFragment : Fragment() {
         if (activity != null) {
 
             val tourismAdapter = UserAdapter()
-            /*tourismAdapter.onItemClick = { selectedData ->
+            tourismAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailUserActivity::class.java)
                 intent.putExtra(DetailUserActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
-            }*/
+            }
 
             val factory = ViewModelFactory.getInstance(requireActivity())
             homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]

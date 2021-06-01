@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 data class UserResponse(
 
     @field:SerializedName("data")
-    val user: List<UserItem>,
+    val user: List<UserItem>
 
-    )
+)
 
 data class UserItem(
 

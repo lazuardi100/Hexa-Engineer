@@ -5,7 +5,9 @@ import androidx.lifecycle.Transformations
 import com.hexaengineer.cofinder.core.data.source.local.LocalDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.RemoteDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiResponse
+import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
+import com.hexaengineer.cofinder.core.domain.model.DetailUser
 import com.hexaengineer.cofinder.core.domain.model.User
 import com.hexaengineer.cofinder.core.domain.repository.IUserRepository
 import com.hexaengineer.cofinder.core.utils.AppExecutors
@@ -35,7 +37,7 @@ class UserRepository private constructor(
         object : NetworkBoundResource<List<User>, List<UserItem>>(appExecutors) {
             override fun loadFromDB(): LiveData<List<User>> {
                 return Transformations.map(localDataSource.getAllUser()) {
-                    DataMapper.mapEntitiesToDomain(it)
+                    DataMapper.mapUserEntitiesToDomain(it)
                 }
             }
 
@@ -47,8 +49,29 @@ class UserRepository private constructor(
                 remoteDataSource.getAllUser()
 
             override fun saveCallResult(data: List<UserItem>) {
-                val userList = DataMapper.mapResponsesToEntities(data)
+                val userList = DataMapper.mapUserResponsesToEntities(data)
                 localDataSource.insertUser(userList)
+            }
+        }.asLiveData()
+
+    override fun getUserDetail(id: String): LiveData<Resource<List<DetailUser>>> =
+        object : NetworkBoundResource<List<DetailUser>, List<DataItem>>(appExecutors) {
+            override fun loadFromDB(): LiveData<List<DetailUser>> {
+                return Transformations.map(localDataSource.getUserDetail()) {
+                    DataMapper.mapDetailUserEntitiesToDomain(it)
+                }
+            }
+
+            override fun shouldFetch(data: List<DetailUser>?): Boolean =
+                data == null || data.isEmpty()
+            //true
+
+            override fun createCall(): LiveData<ApiResponse<List<DataItem>>> =
+                remoteDataSource.getUserDetail(id)
+
+            override fun saveCallResult(data: List<DataItem>) {
+                val userDetail = DataMapper.mapDetailUserResponsesToEntities(data)
+                localDataSource.insertUserDetail(userDetail)
             }
         }.asLiveData()
 }

@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiResponse
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiService
+import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
+import com.hexaengineer.cofinder.core.data.source.remote.response.UserDetailResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserResponse
 import retrofit2.Call
@@ -38,6 +40,30 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                resultData.value = ApiResponse.Error(t.message.toString())
+                Log.e("RemoteDataSource", t.message.toString())
+            }
+        })
+
+        return resultData
+    }
+
+    fun getUserDetail(id: String): LiveData<ApiResponse<List<DataItem>>> {
+        val resultData = MutableLiveData<ApiResponse<List<DataItem>>>()
+
+        //get data from remote api
+        val client = apiService.getUserDetail(id)
+
+        client.enqueue(object : Callback<UserDetailResponse> {
+            override fun onResponse(
+                call: Call<UserDetailResponse>,
+                response: Response<UserDetailResponse>
+            ) {
+                val dataArray = response.body()?.data
+                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+            }
+
+            override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
                 resultData.value = ApiResponse.Error(t.message.toString())
                 Log.e("RemoteDataSource", t.message.toString())
             }

@@ -1,6 +1,7 @@
 package com.hexaengineer.cofinder.core.data.source.local
 
 import androidx.lifecycle.LiveData
+import com.hexaengineer.cofinder.core.data.source.local.entity.UserDetailEntity
 import com.hexaengineer.cofinder.core.data.source.local.entity.UserEntity
 import com.hexaengineer.cofinder.core.data.source.local.room.UserDao
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
@@ -18,6 +19,10 @@ class LocalDataSource private constructor(private val userDao: UserDao) {
 
     fun getAllUser(): LiveData<List<UserEntity>> = userDao.getAllUser()
 
+    fun getUserDetail(): LiveData<List<UserDetailEntity>> = userDao.getUserDetail()
+
     fun insertUser(userList: List<UserEntity>) = userDao.insertUser(userList)
+
+    fun insertUserDetail(userDetail: List<UserDetailEntity>) = userDao.insertUserDetail(userDetail)
 
 }

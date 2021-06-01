@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hexaengineer.cofinder.core.di.Injection
 import com.hexaengineer.cofinder.core.domain.usecase.UserUseCase
+import com.hexaengineer.cofinder.ui.detail.DetailViewModel
 import com.hexaengineer.cofinder.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val userUseCase: UserUseCase) :
@@ -27,6 +28,9 @@ class ViewModelFactory private constructor(private val userUseCase: UserUseCase)
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(userUseCase) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(userUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

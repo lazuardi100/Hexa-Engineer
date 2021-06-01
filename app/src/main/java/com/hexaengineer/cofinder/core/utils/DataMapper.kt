@@ -1,11 +1,14 @@
 package com.hexaengineer.cofinder.core.utils
 
+import com.hexaengineer.cofinder.core.data.source.local.entity.UserDetailEntity
 import com.hexaengineer.cofinder.core.data.source.local.entity.UserEntity
+import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
+import com.hexaengineer.cofinder.core.domain.model.DetailUser
 import com.hexaengineer.cofinder.core.domain.model.User
 
 object DataMapper {
-    fun mapResponsesToEntities(input: List<UserItem>): List<UserEntity> {
+    fun mapUserResponsesToEntities(input: List<UserItem>): List<UserEntity> {
         val userList = ArrayList<UserEntity>()
         input.map {
             val user = UserEntity(
@@ -20,7 +23,7 @@ object DataMapper {
         return userList
     }
 
-    fun mapEntitiesToDomain(input: List<UserEntity>): List<User> =
+    fun mapUserEntitiesToDomain(input: List<UserEntity>): List<User> =
         input.map {
             User(
                 id = it.id,
@@ -38,4 +41,30 @@ object DataMapper {
         picture = input.picture,
         city = input.city
     )
+
+    fun mapDetailUserResponsesToEntities(input: List<DataItem>): List<UserDetailEntity> {
+        val userDetail = ArrayList<UserDetailEntity>()
+        input.map {
+            val user = UserDetailEntity(
+                id = it.id,
+                personalities = it.personalities,
+                description = it.description,
+                address = it.address,
+                kontak = it.kontak
+            )
+            userDetail.add(user)
+        }
+        return userDetail
+    }
+
+    fun mapDetailUserEntitiesToDomain(input: List<UserDetailEntity>): List<DetailUser> =
+        input.map {
+            DetailUser(
+                id = it.id,
+                personalities = it.personalities,
+                description = it.description,
+                address = it.address,
+                kontak = it.kontak
+            )
+        }
 }
