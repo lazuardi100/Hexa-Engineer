@@ -3,6 +3,7 @@ import os
 
 from flask import Flask, request
 from flask_mysqldb import MySQL
+from db import initialize as init_db
 
 from utility import to_JSON
 from model import predict as prediction
@@ -10,11 +11,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = '34.101.238.80'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Rahasia123'
-app.config['MYSQL_DB'] = 'BANGKIT'
-
+init_db(app)
 
 mysql = MySQL(app)
 
@@ -79,7 +76,7 @@ def predict_test():
             'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
             'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
     input = np.array([words])
-    
+
     test_data = {
         'instances': input.tolist()
     }
