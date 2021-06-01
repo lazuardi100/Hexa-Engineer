@@ -41,10 +41,10 @@ class UserRepository private constructor(
 
             override fun shouldFetch(data: List<User>?): Boolean =
                 data == null || data.isEmpty()
-                //true
+            //true
 
             override fun createCall(): LiveData<ApiResponse<List<UserItem>>> =
-                remoteDataSource.getAllTourism()
+                remoteDataSource.getAllUser()
 
             override fun saveCallResult(data: List<UserItem>) {
                 val userList = DataMapper.mapResponsesToEntities(data)

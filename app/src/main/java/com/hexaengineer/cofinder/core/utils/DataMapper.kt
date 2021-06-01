@@ -20,7 +20,7 @@ object DataMapper {
         return userList
     }
 
-    fun mapEntitiesToDomain(input: List<UserItem>): List<User> =
+    fun mapEntitiesToDomain(input: List<UserEntity>): List<User> =
         input.map {
             User(
                 id = it.id,

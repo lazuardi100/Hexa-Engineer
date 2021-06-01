@@ -22,7 +22,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
     }
 
-    fun getAllTourism(): LiveData<ApiResponse<List<UserItem>>> {
+    fun getAllUser(): LiveData<ApiResponse<List<UserItem>>> {
         val resultData = MutableLiveData<ApiResponse<List<UserItem>>>()
 
         //get data from remote api

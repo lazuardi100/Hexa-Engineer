@@ -16,7 +16,7 @@ class LocalDataSource private constructor(private val userDao: UserDao) {
             }
     }
 
-    fun getAllUser(): LiveData<List<UserItem>> = userDao.getAllUser()
+    fun getAllUser(): LiveData<List<UserEntity>> = userDao.getAllUser()
 
     fun insertUser(userList: List<UserEntity>) = userDao.insertUser(userList)
 
