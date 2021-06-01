@@ -4,7 +4,6 @@ import os
 from flask import Flask, request
 from flask_mysqldb import MySQL
 
-
 from utility import to_JSON
 from model import predict as prediction
 import numpy as np
@@ -12,8 +11,8 @@ import numpy as np
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = '34.101.238.80'
-app.config['MYSQL_USER'] = 'user'
-app.config['MYSQL_PASSWORD'] = 'Rahasia'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Rahasia123'
 app.config['MYSQL_DB'] = 'BANGKIT'
 
 
