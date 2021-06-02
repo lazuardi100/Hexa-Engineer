@@ -5,7 +5,7 @@ import os
 import tensorflow_hub as hub
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-import string
+import string, time
 
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
@@ -15,6 +15,12 @@ neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects={'KerasLa
 agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 con_model = tf.keras.models.load_model('./con_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+
+ext_model = tf.keras.models.load_model('./ml_model/ext_model.h5')
+neu_model = tf.keras.models.load_model('./ml_model/neu_model.h5')
+agr_model = tf.keras.models.load_model('./ml_model/agr_model.h5')
+con_model = tf.keras.models.load_model('./ml_model/con_model.h5')
+opn_model = tf.keras.models.load_model('./ml_model/opn_model.h5')
 
 def preprocess_text(text):
   #lowercase all character in the text
@@ -32,12 +38,15 @@ def preprocess_text(text):
   return text
 
 def predict(data):
+    start_time = time.time()
+
     data = preprocess_text(data)
     ext_prediction = ext_model.predict(data)
     neu_prediction = neu_model.predict(data)
     agr_prediction = agr_model.predict(data)
     con_prediction = con_model.predict(data)
     opn_prediction = opn_model.predict(data)
+
    # prediction = ext_model.predict(data.get("instances"))
     ext_prediction_string = [str(pred) for pred in ext_prediction]
     neu_prediction_string = [str(pred) for pred in neu_prediction]
@@ -51,7 +60,8 @@ def predict(data):
         "neu_prediction": list(neu_prediction_string),
         "agr_prediction": list(agr_prediction_string),
         "con_prediction": list(con_prediction_string),
-        "opn_prediction": list(opn_prediction_string)
+        "opn_prediction": list(opn_prediction_string),
+        "time_consumed": str(time.time()-start_time)
     }
 
     return json.dumps(response_json)
