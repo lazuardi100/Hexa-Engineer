@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from flask import Flask, request
 from flask_mysqldb import MySQL
@@ -88,4 +89,6 @@ def predict_test():
 
 if __name__ == '__main__':
     # app.run()
+    start_time = time.time()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    print("Time consumed to start server: {} second".format(str(time.time()-start_time)))
