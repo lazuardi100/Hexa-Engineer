@@ -10,6 +10,8 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import tensorflow as tf
 import tensorflow_hub as hub
 
+import numpy as np
+
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
@@ -64,3 +66,25 @@ def predict(data):
     }
 
     return json.dumps(response_json)
+
+
+# if __name__ == '__main__':
+#     words = 'bangun tidur siang tengah aneh pindah texas milik konsentrasi halhal kerja rumah kelas 10 cepat jam ' \
+#             'dentang 4 henti mudah laku pindah kerja rumah tantang kerja sibuk putus habis berjamjam laku bayar ' \
+#             'perhati kelas barangbarang benarbenar keras tinggal lacak tahun malas jenius hei lambat baik benarbenar ' \
+#             'fokus tinggal kampus konsentrasi mudah sayang tinggal rumah awas ketat tua omel adik omel omel omel ' \
+#             'titik repot pergi jalan sekolah pergi pustaka ajar pindah memberitahu salah pindah pergi lindung milik ' \
+#             'khawatir dunia satusatunya jaga kamar bersih bantu bisnis uang ut hidup asrama apartemen semester pikir ' \
+#             'ambil untung off topik pergi jalan enam malam milik ledak cinta austin tinggal va pergi dc waktu milik ' \
+#             'ledak siswa lari malam bersenangsenang tanggung bersenangsenang prioritas lurus tinggal rumah kau harap ' \
+#             'laku tanggung adik kacau pergi gila pindah guru tinggi kacau karir guru tinggi pesta alas utama pergi ' \
+#             'bersenangsenang biar pergi jajah dunia india budaya india nilainilai india lawan bersenangsenang maksud ' \
+#             'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
+#             'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
+#     input = np.array([words])
+#
+#     test_data = {
+#         'instances': input.tolist()
+#     }
+#     data = json.dumps(test_data)
+#     response_json = predict(input.tolist())
