@@ -20,8 +20,9 @@ agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects=custom_ob
 con_model = tf.keras.models.load_model('./con_model.h5',custom_objects=custom_objects)
 opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects=custom_objects)
 
-def preprocess_text(text):
+def preprocess_text(input):
   #lowercase all character in the text
+  text = input[0]
   text = text.lower()
   #remove punctuation
   text = text.translate(str.maketrans("","",string.punctuation))
