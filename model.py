@@ -16,12 +16,6 @@ agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects={'KerasLa
 con_model = tf.keras.models.load_model('./con_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 
-ext_model = tf.keras.models.load_model('./ml_model/ext_model.h5')
-neu_model = tf.keras.models.load_model('./ml_model/neu_model.h5')
-agr_model = tf.keras.models.load_model('./ml_model/agr_model.h5')
-con_model = tf.keras.models.load_model('./ml_model/con_model.h5')
-opn_model = tf.keras.models.load_model('./ml_model/opn_model.h5')
-
 def preprocess_text(text):
   #lowercase all character in the text
   text = text.lower()
