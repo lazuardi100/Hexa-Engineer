@@ -2,6 +2,7 @@ import json
 import requests
 import tensorflow as tf
 import os
+import tensorflow_hub as hub
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import string
@@ -9,11 +10,11 @@ import string
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
-ext_model = tf.keras.models.load_model('./ext_model.h5')
-neu_model = tf.keras.models.load_model('./neu_model.h5')
-agr_model = tf.keras.models.load_model('./agr_model.h5')
-con_model = tf.keras.models.load_model('./con_model.h5')
-opn_model = tf.keras.models.load_model('./opn_model.h5')
+ext_model = tf.keras.models.load_model('./ext_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+con_model = tf.keras.models.load_model('./con_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 
 def preprocess_text(text):
   #lowercase all character in the text
