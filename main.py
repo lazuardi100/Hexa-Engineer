@@ -50,14 +50,7 @@ def get_detail_user(id):
 @app.route('/api/predict/<int:id>', methods=['POST'])
 def predict(id):
     words = request.args.get("words")
-
-    np_words = np.array([words])
-
-    test_data = {
-        'instances': np_words.tolist()
-    }
-    data = json.dumps(test_data)
-    response_json = prediction(np_words.tolist())
+    response_json = prediction(words)
 
     return response_json
 
@@ -76,13 +69,8 @@ def predict_test():
             'bersenangsenang biar pergi jajah dunia india budaya india nilainilai india lawan bersenangsenang maksud ' \
             'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
             'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
-    input = np.array([words])
-
-    test_data = {
-        'instances': input.tolist()
-    }
-    data = json.dumps(test_data)
-    response_json = prediction(input.tolist())
+    
+    response_json = prediction(words)
 
     return response_json
 
