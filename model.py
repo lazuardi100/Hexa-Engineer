@@ -40,10 +40,10 @@ def predict(data):
     predict_data = numpy.array([preprocessed_data]).tolist()
 
     ext_prediction = ext_model.predict(predict_data)
-    neu_prediction = neu_model.predict(data)
-    agr_prediction = agr_model.predict(data)
-    con_prediction = con_model.predict(data)
-    opn_prediction = opn_model.predict(data)
+    neu_prediction = neu_model.predict(predict_data)
+    agr_prediction = agr_model.predict(predict_data)
+    con_prediction = con_model.predict(predict_data)
+    opn_prediction = opn_model.predict(predict_data)
 
     ext_prediction_string = [str(pred) for pred in ext_prediction]
     neu_prediction_string = [str(pred) for pred in neu_prediction]
