@@ -49,7 +49,7 @@ def get_detail_user(id):
 
 @app.route('/api/predict/<int:id>', methods=['POST'])
 def predict(id):
-    words = request.args.get("words")
+    words = str(request.args.get("words"))
     response_json = prediction(words)
 
     return response_json
