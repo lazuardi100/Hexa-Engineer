@@ -1,11 +1,13 @@
 package com.hexaengineer.cofinder.core.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.hexaengineer.cofinder.core.data.source.local.LocalDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.RemoteDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
+import com.hexaengineer.cofinder.core.data.source.remote.response.UserDetailResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
 import com.hexaengineer.cofinder.core.domain.model.DetailUser
 import com.hexaengineer.cofinder.core.domain.model.User
@@ -42,8 +44,8 @@ class UserRepository private constructor(
             }
 
             override fun shouldFetch(data: List<User>?): Boolean =
-                data == null || data.isEmpty()
-            //true
+                //data == null || data.isEmpty()
+                true
 
             override fun createCall(): LiveData<ApiResponse<List<UserItem>>> =
                 remoteDataSource.getAllUser()
@@ -63,8 +65,8 @@ class UserRepository private constructor(
             }
 
             override fun shouldFetch(data: List<DetailUser>?): Boolean =
-                data == null || data.isEmpty()
-            //true
+                //data == null || data.isEmpty()
+                true
 
             override fun createCall(): LiveData<ApiResponse<List<DataItem>>> =
                 remoteDataSource.getUserDetail(id)
@@ -74,5 +76,22 @@ class UserRepository private constructor(
                 localDataSource.insertUserDetail(userDetail)
             }
         }.asLiveData()
+
+    override fun getDetail(userId: String): LiveData<DetailUser> {
+        val userDetail = MutableLiveData<DetailUser>()
+        remoteDataSource.getUserDetail(userId, object : RemoteDataSource.LoadUserDetailCallback {
+            override fun onAllUserDetailReceived(userItem: UserDetailResponse) {
+                val user = DetailUser(
+                    id = userItem.data[0].id,
+                    personalities = userItem.data[0].personalities,
+                    description = userItem.data[0].description,
+                    address = userItem.data[0].address,
+                    kontak = userItem.data[0].kontak
+                )
+                userDetail.postValue(user)
+            }
+        })
+        return userDetail
+    }
 }
 

@@ -8,4 +8,6 @@ class UserInteractor(private val userRepository: IUserRepository): UserUseCase {
 
     override fun getUserDetail(id: String) = userRepository.getUserDetail(id)
 
+    override fun getDetail(id: String) = userRepository.getDetail(id)
+
 }

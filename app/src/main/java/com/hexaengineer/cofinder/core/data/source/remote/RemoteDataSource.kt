@@ -71,4 +71,24 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
         return resultData
     }
+
+    fun getUserDetail(userId: String, callback: LoadUserDetailCallback) {
+        apiService.getUserDetail(userId)
+            .enqueue(object : Callback<UserDetailResponse>{
+                override fun onResponse(
+                    call: Call<UserDetailResponse>,
+                    response: Response<UserDetailResponse>
+                ) {
+                    response.body()?.let { callback.onAllUserDetailReceived(it) }
+                }
+
+                override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
+                    Log.d("error: ", t.printStackTrace().toString())
+                }
+            })
+    }
+
+    interface LoadUserDetailCallback {
+        fun onAllUserDetailReceived(userItem: UserDetailResponse)
+    }
 }

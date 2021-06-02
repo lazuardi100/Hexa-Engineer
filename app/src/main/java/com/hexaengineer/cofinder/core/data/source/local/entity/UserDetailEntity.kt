@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "user_detail")
 data class UserDetailEntity(
     @PrimaryKey
-    @NonNull
-    val id: Int,
-    val personalities: Any,
-    val description: Any,
-    val address: String,
-    val kontak: String
+    val id: Int? = 0,
+    val personalities: String? = null,
+    val description: String? = null,
+    val address: String? = null,
+    val kontak: String? = null
 )

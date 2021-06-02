@@ -34,14 +34,6 @@ object DataMapper {
             )
         }
 
-    fun mapDomainToEntity(input: User) = UserEntity(
-        id = input.id,
-        name = input.name,
-        skills = input.skills,
-        picture = input.picture,
-        city = input.city
-    )
-
     fun mapDetailUserResponsesToEntities(input: List<DataItem>): List<UserDetailEntity> {
         val userDetail = ArrayList<UserDetailEntity>()
         input.map {
@@ -67,4 +59,19 @@ object DataMapper {
                 kontak = it.kontak
             )
         }
+
+    fun mapDetailUserResponsesToDomain(input: List<DataItem>): List<DetailUser> {
+        val userDetail = ArrayList<DetailUser>()
+        input.map {
+            val user = DetailUser(
+                id = it.id,
+                personalities = it.personalities,
+                description = it.description,
+                address = it.address,
+                kontak = it.kontak
+            )
+            userDetail.add(user)
+        }
+        return userDetail
+    }
 }
