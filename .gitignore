@@ -3,3 +3,9 @@
 /__pycache__
 nohup.out
 /EXT_Model_v1
+agr_model.h5
+con_model.h5
+ext_model.h5
+/ml_model
+neu_model.h5
+opn_model.h5
