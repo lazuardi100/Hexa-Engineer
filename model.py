@@ -10,11 +10,11 @@ import string, time
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
-ext_model = tf.keras.models.load_model('gs://b21-cap0116/ext_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
-neu_model = tf.keras.models.load_model('gs://b21-cap0116/neu_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
-agr_model = tf.keras.models.load_model('gs://b21-cap0116/agr_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
-con_model = tf.keras.models.load_model('gs://b21-cap0116/con_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
-opn_model = tf.keras.models.load_model('gs://b21-cap0116/opn_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+ext_model = tf.keras.models.load_model('./ext_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+con_model = tf.keras.models.load_model('./con_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
+opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects={'KerasLayer':hub.KerasLayer})
 
 def preprocess_text(text):
   #lowercase all character in the text
