@@ -10,15 +10,12 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import tensorflow as tf
 import tensorflow_hub as hub
 
-SIZE = 128
-MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
-
 custom_objects = {'KerasLayer':hub.KerasLayer,'tf': tf}
 ext_model = tf.keras.models.load_model('./ext_model.h5',custom_objects=custom_objects)
-# neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects=custom_objects)
-# agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects=custom_objects)
-# con_model = tf.keras.models.load_model('./con_model.h5',custom_objects=custom_objects)
-# opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects=custom_objects)
+neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects=custom_objects)
+agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects=custom_objects)
+con_model = tf.keras.models.load_model('./con_model.h5',custom_objects=custom_objects)
+opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects=custom_objects)
 
 def preprocess_text(text):
   #lowercase all character in the text
@@ -43,43 +40,46 @@ def predict(data):
     predict_data = numpy.array([preprocessed_data]).tolist()
 
     ext_prediction = ext_model.predict(predict_data)
-    # neu_prediction = neu_model.predict(data)
-    # agr_prediction = agr_model.predict(data)
-    # con_prediction = con_model.predict(data)
-    # opn_prediction = opn_model.predict(data)
+    neu_prediction = neu_model.predict(data)
+    agr_prediction = agr_model.predict(data)
+    con_prediction = con_model.predict(data)
+    opn_prediction = opn_model.predict(data)
 
-   # prediction = ext_model.predict(data.get("instances"))
     ext_prediction_string = [str(pred) for pred in ext_prediction]
-    # neu_prediction_string = [str(pred) for pred in neu_prediction]
-    # agr_prediction_string = [str(pred) for pred in agr_prediction]
-    # con_prediction_string = [str(pred) for pred in con_prediction]
-    # opn_prediction_string = [str(pred) for pred in opn_prediction]
+    neu_prediction_string = [str(pred) for pred in neu_prediction]
+    agr_prediction_string = [str(pred) for pred in agr_prediction]
+    con_prediction_string = [str(pred) for pred in con_prediction]
+    opn_prediction_string = [str(pred) for pred in opn_prediction]
     response_json = {
         "data" : data,
-        #"data" : data.get("instances"),
-        "ext_prediction": list(ext_prediction_string),
-        # "neu_prediction": list(neu_prediction_string),
-        # "agr_prediction": list(agr_prediction_string),
-        # "con_prediction": list(con_prediction_string),
-        # "opn_prediction": list(opn_prediction_string),
+        "ext_prediction": changeLabel(ext_prediction_string),
+        "neu_prediction": changeLabel(neu_prediction_string),
+        "agr_prediction": changeLabel(agr_prediction_string),
+        "con_prediction": changeLabel(con_prediction_string),
+        "opn_prediction": changeLabel(opn_prediction_string),
         "time_consumed": str(time.time()-start_time)
     }
 
     return json.dumps(response_json)
 
+def changeLabel(data):
+  if float(data) < 0.5:
+    return False
+  else:
+    return True
 
-if __name__ == '__main__':
-    words = 'bangun tidur siang tengah aneh pindah texas milik konsentrasi halhal kerja rumah kelas 10 cepat jam ' \
-            'dentang 4 henti mudah laku pindah kerja rumah tantang kerja sibuk putus habis berjamjam laku bayar ' \
-            'perhati kelas barangbarang benarbenar keras tinggal lacak tahun malas jenius hei lambat baik benarbenar ' \
-            'fokus tinggal kampus konsentrasi mudah sayang tinggal rumah awas ketat tua omel adik omel omel omel ' \
-            'titik repot pergi jalan sekolah pergi pustaka ajar pindah memberitahu salah pindah pergi lindung milik ' \
-            'khawatir dunia satusatunya jaga kamar bersih bantu bisnis uang ut hidup asrama apartemen semester pikir ' \
-            'ambil untung off topik pergi jalan enam malam milik ledak cinta austin tinggal va pergi dc waktu milik ' \
-            'ledak siswa lari malam bersenangsenang tanggung bersenangsenang prioritas lurus tinggal rumah kau harap ' \
-            'laku tanggung adik kacau pergi gila pindah guru tinggi kacau karir guru tinggi pesta alas utama pergi ' \
-            'bersenangsenang biar pergi jajah dunia india budaya india nilainilai india lawan bersenangsenang maksud ' \
-            'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
-            'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
+# if __name__ == '__main__':
+#     words = 'bangun tidur siang tengah aneh pindah texas milik konsentrasi halhal kerja rumah kelas 10 cepat jam ' \
+#             'dentang 4 henti mudah laku pindah kerja rumah tantang kerja sibuk putus habis berjamjam laku bayar ' \
+#             'perhati kelas barangbarang benarbenar keras tinggal lacak tahun malas jenius hei lambat baik benarbenar ' \
+#             'fokus tinggal kampus konsentrasi mudah sayang tinggal rumah awas ketat tua omel adik omel omel omel ' \
+#             'titik repot pergi jalan sekolah pergi pustaka ajar pindah memberitahu salah pindah pergi lindung milik ' \
+#             'khawatir dunia satusatunya jaga kamar bersih bantu bisnis uang ut hidup asrama apartemen semester pikir ' \
+#             'ambil untung off topik pergi jalan enam malam milik ledak cinta austin tinggal va pergi dc waktu milik ' \
+#             'ledak siswa lari malam bersenangsenang tanggung bersenangsenang prioritas lurus tinggal rumah kau harap ' \
+#             'laku tanggung adik kacau pergi gila pindah guru tinggi kacau karir guru tinggi pesta alas utama pergi ' \
+#             'bersenangsenang biar pergi jajah dunia india budaya india nilainilai india lawan bersenangsenang maksud ' \
+#             'temu orangorang pacar pesta bersenangsenang sekolah sulit pikir milik bebas tempat tekan buat sekolah ' \
+#             'tua harap senang tulis pergi tulis bantu pikir urut harap bersenangsenang baca untung ta '
     
-    response_json = predict(words)
+#     response_json = predict(words)
