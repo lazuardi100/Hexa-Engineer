@@ -9,11 +9,12 @@ import string, time
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
 
-ext_model = tf.keras.models.load_model('./ext_model.h5')
-neu_model = tf.keras.models.load_model('./neu_model.h5')
-agr_model = tf.keras.models.load_model('./agr_model.h5')
-con_model = tf.keras.models.load_model('./con_model.h5')
-opn_model = tf.keras.models.load_model('./opn_model.h5')
+
+ext_model = tf.keras.models.load_model('./ml_model/ext_model.h5')
+neu_model = tf.keras.models.load_model('./ml_model/neu_model.h5')
+agr_model = tf.keras.models.load_model('./ml_model/agr_model.h5')
+con_model = tf.keras.models.load_model('./ml_model/con_model.h5')
+opn_model = tf.keras.models.load_model('./ml_model/opn_model.h5')
 
 def preprocess_text(text):
   #lowercase all character in the text
