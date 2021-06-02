@@ -1,11 +1,14 @@
 import json
 import requests
-import tensorflow as tf
+import numpy
+import matplotlib
+import string, time
 import os
-import tensorflow_hub as hub
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-import string, time
+
+import tensorflow as tf
+import tensorflow_hub as hub
 
 SIZE = 128
 MODEL_URI = 'http://localhost:8501/v1/models/pets:predict'
