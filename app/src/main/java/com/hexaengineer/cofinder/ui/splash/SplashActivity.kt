@@ -1,11 +1,11 @@
 package com.hexaengineer.cofinder.ui.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.hexaengineer.cofinder.R
 import com.hexaengineer.cofinder.databinding.ActivitySplashBinding
 import com.hexaengineer.cofinder.ui.main.MainActivity

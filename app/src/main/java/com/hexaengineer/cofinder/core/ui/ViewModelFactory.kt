@@ -7,6 +7,7 @@ import com.hexaengineer.cofinder.core.di.Injection
 import com.hexaengineer.cofinder.core.domain.usecase.UserUseCase
 import com.hexaengineer.cofinder.ui.detail.DetailViewModel
 import com.hexaengineer.cofinder.ui.home.HomeViewModel
+import com.hexaengineer.cofinder.ui.personality.PersonalityViewModel
 
 class ViewModelFactory private constructor(private val userUseCase: UserUseCase) :
     ViewModelProvider.NewInstanceFactory() {
@@ -31,6 +32,9 @@ class ViewModelFactory private constructor(private val userUseCase: UserUseCase)
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(userUseCase) as T
+            }
+            modelClass.isAssignableFrom(PersonalityViewModel::class.java) -> {
+                PersonalityViewModel(userUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

@@ -1,6 +1,5 @@
 package com.hexaengineer.cofinder.core.data.source.local.entity
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

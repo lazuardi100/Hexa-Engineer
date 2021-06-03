@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.hexaengineer.cofinder.R
 import com.hexaengineer.cofinder.core.domain.model.User
 import com.hexaengineer.cofinder.databinding.ItemUserBinding
-import java.util.ArrayList
+import java.util.*
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 

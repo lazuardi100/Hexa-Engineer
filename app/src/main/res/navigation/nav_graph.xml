@@ -19,7 +19,7 @@
         android:id="@+id/post_fragment"
         android:name="com.hexaengineer.cofinder.ui.post.PostFragment"
         android:label="@string/posting"
-        tools:layout="@layout/fragment_post" >
+        tools:layout="@layout/fragment_post">
         <action
             android:id="@+id/action_post_fragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />

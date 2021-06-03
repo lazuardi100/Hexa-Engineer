@@ -1,10 +1,12 @@
 package com.hexaengineer.cofinder.core.data.source.local.room
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.hexaengineer.cofinder.core.data.source.local.entity.UserDetailEntity
 import com.hexaengineer.cofinder.core.data.source.local.entity.UserEntity
-import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
 
 @Dao
 interface UserDao {

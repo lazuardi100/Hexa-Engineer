@@ -2,7 +2,7 @@ package com.hexaengineer.cofinder.core.domain.usecase
 
 import com.hexaengineer.cofinder.core.domain.repository.IUserRepository
 
-class UserInteractor(private val userRepository: IUserRepository): UserUseCase {
+class UserInteractor(private val userRepository: IUserRepository) : UserUseCase {
 
     override fun getAllUser() = userRepository.getAllUser()
 
@@ -10,4 +10,6 @@ class UserInteractor(private val userRepository: IUserRepository): UserUseCase {
 
     override fun getDetail(id: String) = userRepository.getDetail(id)
 
+    override fun postPersonality(id: String, personality: String) =
+        userRepository.postPersonality(id, personality)
 }

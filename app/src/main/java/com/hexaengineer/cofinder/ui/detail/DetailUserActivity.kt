@@ -1,12 +1,11 @@
 package com.hexaengineer.cofinder.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.hexaengineer.cofinder.core.data.Resource
 import com.hexaengineer.cofinder.core.domain.model.User
 import com.hexaengineer.cofinder.core.ui.ViewModelFactory
 import com.hexaengineer.cofinder.databinding.ActivityDetailUserBinding
@@ -46,6 +45,7 @@ class DetailUserActivity : AppCompatActivity() {
                 tvAddress.text = userDetail.address
                 tvContact.text = userDetail.kontak
             }
+            Toast.makeText(this, userDetail.personalities, Toast.LENGTH_SHORT).show()
         })
 
 

@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiResponse
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiService
-import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
-import com.hexaengineer.cofinder.core.data.source.remote.response.UserDetailResponse
-import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
-import com.hexaengineer.cofinder.core.data.source.remote.response.UserResponse
+import com.hexaengineer.cofinder.core.data.source.remote.response.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,7 +33,8 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                 response: Response<UserResponse>
             ) {
                 val dataArray = response.body()?.user
-                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+                resultData.value =
+                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
             }
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
@@ -60,7 +58,8 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
                 response: Response<UserDetailResponse>
             ) {
                 val dataArray = response.body()?.data
-                resultData.value = if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
+                resultData.value =
+                    if (dataArray != null) ApiResponse.Success(dataArray) else ApiResponse.Empty
             }
 
             override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
@@ -74,7 +73,7 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
     fun getUserDetail(userId: String, callback: LoadUserDetailCallback) {
         apiService.getUserDetail(userId)
-            .enqueue(object : Callback<UserDetailResponse>{
+            .enqueue(object : Callback<UserDetailResponse> {
                 override fun onResponse(
                     call: Call<UserDetailResponse>,
                     response: Response<UserDetailResponse>
@@ -84,6 +83,22 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
                 override fun onFailure(call: Call<UserDetailResponse>, t: Throwable) {
                     Log.d("error: ", t.printStackTrace().toString())
+                }
+            })
+    }
+
+    fun postPersonality(userId: String, words: String) {
+        apiService.postPersonality(userId, words)
+            .enqueue(object : Callback<PostPersonalityResponse> {
+                override fun onResponse(
+                    call: Call<PostPersonalityResponse>,
+                    response: Response<PostPersonalityResponse>
+                ) {
+                    Log.e("Personality: ", "onSuccess: ${response.message()}")
+                }
+
+                override fun onFailure(call: Call<PostPersonalityResponse>, t: Throwable) {
+                    Log.e("Personality: ", "onFailure: ${t.message.toString()}")
                 }
             })
     }

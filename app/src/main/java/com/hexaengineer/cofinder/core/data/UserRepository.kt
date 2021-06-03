@@ -93,5 +93,9 @@ class UserRepository private constructor(
         })
         return userDetail
     }
+
+    override fun postPersonality(userId: String, personality: String) {
+        remoteDataSource.postPersonality(userId, personality)
+    }
 }
 

@@ -2,10 +2,10 @@ package com.hexaengineer.cofinder.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hexaengineer.cofinder.R
@@ -55,7 +55,8 @@ class HomeFragment : Fragment() {
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
-                            binding.viewError.tvError.text = user.message ?: getString(R.string.error)
+                            binding.viewError.tvError.text =
+                                user.message ?: getString(R.string.error)
                         }
                     }
                 }
