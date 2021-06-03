@@ -7,19 +7,9 @@
         android:title="@string/beranda" />
 
     <item
-        android:id="@+id/coworker_fragment"
-        android:icon="@drawable/ic_cowork"
-        android:title="@string/coworker" />
-
-    <item
         android:id="@+id/post_fragment"
         android:icon="@drawable/ic_add"
         android:title="@string/posting" />
-
-    <item
-        android:id="@+id/notification_fragment"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="@string/notifikasi" />
 
     <item
         android:id="@+id/profile_fragment"

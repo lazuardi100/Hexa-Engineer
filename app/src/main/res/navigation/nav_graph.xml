@@ -11,17 +11,7 @@
         android:label="@string/beranda"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home_fragment_to_coworker_fragment"
-            app:destination="@id/coworker_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/coworker_fragment"
-        android:name="com.hexaengineer.cofinder.ui.coworker.CoworkerFragment"
-        android:label="@string/coworker"
-        tools:layout="@layout/fragment_coworker">
-        <action
-            android:id="@+id/action_coworker_fragment_to_post_fragment"
+            android:id="@+id/action_home_fragment_to_post_fragment"
             app:destination="@id/post_fragment" />
     </fragment>
 
@@ -31,17 +21,7 @@
         android:label="@string/posting"
         tools:layout="@layout/fragment_post" >
         <action
-            android:id="@+id/action_post_fragment_to_notification_fragment"
-            app:destination="@id/notification_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/notification_fragment"
-        android:name="com.hexaengineer.cofinder.ui.notification.NotificationFragment"
-        android:label="@string/notifikasi"
-        tools:layout="@layout/fragment_notification" >
-        <action
-            android:id="@+id/action_notification_fragment_to_profile_fragment"
+            android:id="@+id/action_post_fragment_to_profile_fragment"
             app:destination="@id/profile_fragment" />
     </fragment>
 
