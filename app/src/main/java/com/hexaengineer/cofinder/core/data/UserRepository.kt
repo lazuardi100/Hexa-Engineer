@@ -7,10 +7,12 @@ import com.hexaengineer.cofinder.core.data.source.local.LocalDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.RemoteDataSource
 import com.hexaengineer.cofinder.core.data.source.remote.network.ApiResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.DataItem
+import com.hexaengineer.cofinder.core.data.source.remote.response.PostPersonalityResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserDetailResponse
 import com.hexaengineer.cofinder.core.data.source.remote.response.UserItem
 import com.hexaengineer.cofinder.core.domain.model.DetailUser
 import com.hexaengineer.cofinder.core.domain.model.User
+import com.hexaengineer.cofinder.core.domain.model.Personality
 import com.hexaengineer.cofinder.core.domain.repository.IUserRepository
 import com.hexaengineer.cofinder.core.utils.AppExecutors
 import com.hexaengineer.cofinder.core.utils.DataMapper
@@ -94,8 +96,23 @@ class UserRepository private constructor(
         return userDetail
     }
 
-    override fun postPersonality(userId: String, personality: String) {
-        remoteDataSource.postPersonality(userId, personality)
+    override fun postPersonality(userId: String, personality: String): LiveData<Personality> {
+        val userPersona = MutableLiveData<Personality>()
+        remoteDataSource.postPersonality(userId, personality,object : RemoteDataSource.LoadPersonalityCallback{
+            override fun onPersonalityReceived(userItem: PostPersonalityResponse) {
+                val personality = Personality(
+                    data = userItem.data,
+                    ext_prediction = userItem.ext_prediction,
+                    neu_prediction = userItem.neu_prediction,
+                    agr_prediction = userItem.agr_prediction,
+                    con_prediction = userItem.con_prediction,
+                    opn_prediction = userItem.opn_prediction,
+                    time_consumed = userItem.time_consumed
+                )
+                userPersona.postValue(personality)
+            }
+        })
+        return userPersona
     }
 }
 

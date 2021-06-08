@@ -87,13 +87,14 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             })
     }
 
-    fun postPersonality(userId: String, words: String) {
+    fun postPersonality(userId: String, words: String, callback: LoadPersonalityCallback) {
         apiService.postPersonality(userId, words)
             .enqueue(object : Callback<PostPersonalityResponse> {
                 override fun onResponse(
                     call: Call<PostPersonalityResponse>,
                     response: Response<PostPersonalityResponse>
                 ) {
+                    response.body()?.let { callback.onPersonalityReceived(it) }
                     Log.e("Personality: ", "onSuccess: ${response.message()}")
                 }
 
@@ -105,5 +106,9 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
 
     interface LoadUserDetailCallback {
         fun onAllUserDetailReceived(userItem: UserDetailResponse)
+    }
+
+    interface LoadPersonalityCallback {
+        fun onPersonalityReceived(userItem: PostPersonalityResponse)
     }
 }

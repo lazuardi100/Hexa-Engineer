@@ -45,7 +45,6 @@ class DetailUserActivity : AppCompatActivity() {
                 tvAddress.text = userDetail.address
                 tvContact.text = userDetail.kontak
             }
-            Toast.makeText(this, userDetail.personalities, Toast.LENGTH_SHORT).show()
         })
 
 

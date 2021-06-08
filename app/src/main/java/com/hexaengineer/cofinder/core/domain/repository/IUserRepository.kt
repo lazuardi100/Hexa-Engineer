@@ -3,6 +3,7 @@ package com.hexaengineer.cofinder.core.domain.repository
 import androidx.lifecycle.LiveData
 import com.hexaengineer.cofinder.core.data.Resource
 import com.hexaengineer.cofinder.core.domain.model.DetailUser
+import com.hexaengineer.cofinder.core.domain.model.Personality
 import com.hexaengineer.cofinder.core.domain.model.User
 
 interface IUserRepository {
@@ -13,5 +14,5 @@ interface IUserRepository {
 
     fun getDetail(id: String): LiveData<DetailUser>
 
-    fun postPersonality(id: String, personality: String)
+    fun postPersonality(id: String, personality: String): LiveData<Personality>
 }
