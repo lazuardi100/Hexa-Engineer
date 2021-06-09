@@ -11,11 +11,11 @@ import tensorflow as tf
 import tensorflow_hub as hub
 
 custom_objects = {'KerasLayer':hub.KerasLayer,'tf': tf}
-ext_model = tf.keras.models.load_model('./ext_model.h5',custom_objects=custom_objects)
-neu_model = tf.keras.models.load_model('./neu_model.h5',custom_objects=custom_objects)
-agr_model = tf.keras.models.load_model('./agr_model.h5',custom_objects=custom_objects)
-con_model = tf.keras.models.load_model('./con_model.h5',custom_objects=custom_objects)
-opn_model = tf.keras.models.load_model('./opn_model.h5',custom_objects=custom_objects)
+ext_model = tf.keras.models.load_model('./ext_model_v2.h5',custom_objects=custom_objects)
+neu_model = tf.keras.models.load_model('./neu_model_v2.h5',custom_objects=custom_objects)
+agr_model = tf.keras.models.load_model('./agr_model_v2.h5',custom_objects=custom_objects)
+con_model = tf.keras.models.load_model('./con_model_v2.h5',custom_objects=custom_objects)
+opn_model = tf.keras.models.load_model('./opn_model_v2.h5',custom_objects=custom_objects)
 
 def preprocess_text(text):
   #lowercase all character in the text
