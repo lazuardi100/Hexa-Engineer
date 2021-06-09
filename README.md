@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <br>
-  <a href=""><img src="https://github.com/reynardets/BeeSafe/blob/android/app/img/logo.png" alt="Markdownify" width="200"></a>
+  <a href=""><img src="https://drive.google.com/file/d/1zx3TBIllRcvjpI4bSgwnYUEKNUhj_qQC/view?usp=sharing" alt="Markdownify" width="200"></a>
   <br>
   CoFinder
   <br>
