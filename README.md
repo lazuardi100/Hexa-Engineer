@@ -8,7 +8,23 @@
   <br>
 </h1>
 
-CoFinder is a Mobile Application to help people find business Partner with the same vision.
+CoFinder is a Mobile Application to help people find business Partner with the same vision. 
+
+## Libraries
+#### Android
+- [Retrofit](https://square.github.io/retrofit/)
+- [Smooth Bottom Bar](https://github.com/ibrahimsn98/SmoothBottomBar)
+- [Room Database](https://developer.android.com/training/data-storage/room)
+
+#### Cloud
+- [Google Cloud](https://cloud.google.com/)
+
+#### Machine Learning
+- [Tensorflow](tensorflow.org/)
+- [PySastrawi](https://pypi.org/project/Sastrawi/)
+
+## Screenshots
+
 
 This is Special Project for Bangkit 2021 capstone Project
 
