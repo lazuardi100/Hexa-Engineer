@@ -18,6 +18,7 @@ CoFinder is a Mobile Application to help people find business Partner with the s
 
 #### Cloud
 - [Google Cloud](https://cloud.google.com/)
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/)
 
 #### Machine Learning
 - [Tensorflow](tensorflow.org/)
