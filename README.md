@@ -32,6 +32,14 @@ CoFinder is a Mobile Application to help people find business Partner with the s
   <img src="https://github.com/lazuardi100/Hexa-Engineer/blob/main/Resource/Personality%20Test.jpg" alt="Personality Test" width="200">
   <img src="https://github.com/lazuardi100/Hexa-Engineer/blob/main/Resource/Profile%20Tested.jpeg" alt="Profile Tested" width="200">
 <p>
+  
+## Authors
+- [Akhmad Lazuardi](https://github.com/lazuardi100) - Cloud Computing
+- [Joseph Rudolf M.](https://github.com/Josephrdlf) - Cloud Computing
+- [Brilian Ade Putra](https://github.com/BillyMRX1) - Android Development
+- [Audrey Ardelia](https://github.com/adryrdla) - Android Development
+- [Dimi Karillah P](https://github.com/dimikarillah) - Machine Learning
+- [Shavina Risqia D.] - Machine Learning
 
 This is Special Project for Bangkit 2021 capstone Project
 
